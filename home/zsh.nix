@@ -108,6 +108,8 @@ in
     autosuggestion.enable = true;
     defaultKeymap = "viins";
     shellAliases = {
+      ll = "lsd -la";
+      ls = "lsd";
       lg = "lazygit --ucf ~/.config/lazygit/config.yml";
       lgs = "lazygit --ucf ~/.config/lazygit/config_side-by-side.yml";
       lzd = "lazydocker";
