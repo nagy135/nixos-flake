@@ -199,6 +199,7 @@ services.interception-tools =
     sumneko-lua-language-server
     gh
     gimp
+    wl-clipboard
   #  wget
   ];
 
