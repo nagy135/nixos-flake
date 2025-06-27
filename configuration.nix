@@ -156,6 +156,7 @@ services.interception-tools =
     ];
   };
 
+
   # Install firefox.
   programs.firefox.enable = true;
   nixpkgs.config.allowUnfree = true;
@@ -250,11 +251,12 @@ services.interception-tools =
     enableSSHSupport = true;
   };
 
-  fonts.fonts = with pkgs; [
+
+  fonts.packages = with pkgs; [
 	  nerd-fonts.jetbrains-mono
   ];
   fonts = {
-    enableDefaultFonts = true;
+    enableDefaultPackages = true;
     fontconfig = {
       localConf = ''
         <?xml version='1.0'?>
