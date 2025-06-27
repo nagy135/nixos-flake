@@ -174,6 +174,7 @@ services.interception-tools =
     rpi-imager
     rustc
     cargo
+    gnumake
     rust-analyzer
     ncdu
     gammastep
@@ -194,6 +195,7 @@ services.interception-tools =
     killall
     lua
     stow
+    nautilus
     neofetch
     dmenu
     vifm
@@ -217,7 +219,7 @@ services.interception-tools =
     spotify
     pamixer
     postman
-    transmission
+    transmission_3
     ripgrep
     z-lua
     jq
@@ -231,9 +233,22 @@ services.interception-tools =
     gh
     gimp
     wl-clipboard
+    hyprshot
+    spotify
+    bambu-studio
+    code-cursor
+    teams-for-linux
+    gnupg
+    pinentry-gtk2
   #  wget
   ];
 
+  services.pcscd.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryPackage = pkgs.pinentry-gtk2;
+    enableSSHSupport = true;
+  };
 
   fonts.fonts = with pkgs; [
 	  nerd-fonts.jetbrains-mono
