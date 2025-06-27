@@ -241,6 +241,8 @@ services.interception-tools =
     teams-for-linux
     gnupg
     pinentry-gtk2
+    portal
+    wf-recorder
   #  wget
   ];
 
