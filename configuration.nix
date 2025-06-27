@@ -78,8 +78,34 @@
 
     environment.etc."zsh-fzf-tab/fzf-tab.plugin.zsh".source = "${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh";
 
+  environment = {
+    sessionVariables = {
+      LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
+    };
+  };
+
+  networking.firewall.allowedTCPPorts = [ 80 ];
+
   programs.zsh.enable = true;
   programs.zsh.promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+
+
+  # Enable common container config files in /etc/containers
+  virtualisation.containers.enable = true;
+  virtualisation = {
+    docker = {
+      enable = true;
+      #
+      # # Create a `docker` alias for podman, to use it as a drop-in replacement
+      # dockerCompat = true;
+      #
+      # # Required for containers under podman-compose to be able to talk to each other.
+      # defaultNetwork.settings.dns_enabled = true;
+    };
+  };
+
+  security.pam.sshAgentAuth.enable = true;
+  security.pam.services.sudo.sshAgentAuth = true;
 
     hardware.bluetooth.enable = true;
 
@@ -123,7 +149,7 @@ services.interception-tools =
   users.users.infiniter = {
     isNormalUser = true;
     description = "infiniter";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
       kdePackages.kate
     #  thunderbird
