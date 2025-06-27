@@ -7,7 +7,7 @@
   programs.waybar.style = ''
                * {
                  font-family: "JetBrainsMono Nerd Font";
-                 font-size: 9pt;
+                 font-size: 12pt;
                  font-weight: bold;
                  border-radius: 0px;
                  transition-property: background-color;
@@ -28,11 +28,12 @@
                }
                window#waybar {
                  background-color: transparent;
+                 color: rgb(217, 224, 238);
                }
                window > box {
                  margin-left: 5px;
                  margin-right: 5px;
-                 margin-top: 5px;
+                 margin-top: 0px;
                  background-color: rgb(30, 30, 46);
                }
          #workspaces {
@@ -40,8 +41,8 @@
                  padding-right: 4px;
                }
          #workspaces button {
-                 padding-top: 1px;
-                 padding-bottom: 1px;
+                 padding-top: 0px;
+                 padding-bottom: 0px;
                  padding-left: 5px;
                  padding-right: 5px;
                }
@@ -107,9 +108,10 @@
          #network.disconnected {
                  color: rgb(255, 255, 255);
                }
-         #battery.charging, #battery.full, #battery.discharging {
+         #battery.charging, #battery.plugged, #battery.full, #battery.discharging {
                  color: rgb(250, 227, 176);
                }
+
          #battery.critical:not(.charging) {
                  color: rgb(242, 143, 173);
                }
@@ -135,18 +137,44 @@
                }
   '';
 
-  programs.waybar.settings = {
-    mainBar = {
-      layer = "top";
-      position = "top";
-      height = 20;
-      output = [
-        "eDP-1"
-        "HDMI-A-1"
-      ];
-      modules-left = [ "hyprland/workspaces"];
-      modules-center = [ "hyprland/window" ];
-      modules-right = [ "batter" "cpu" "memory" "temperature" "clock" ];
+programs.waybar.settings = {
+  mainBar = {
+    layer = "top";
+    position = "top";
+    height = 20;
+    output = [
+      "eDP-1"
+      "HDMI-A-1"
+    ];
+    modules-left = [ "hyprland/workspaces"];
+    modules-center = [ "hyprland/window" ];
+    modules-right = [ "battery" "cpu" "memory" "temperature" "clock" ];
+
+    "cpu" = {
+      format = " {usage}%";
+      tooltip = true;
+    };
+
+    "memory" = {
+      format = " {used}MB";
+    };
+
+    "temperature" = {
+      format = " {temperatureC}°C";
+    };
+
+    "battery" = {
+      format = "{capacity}% ";
+      format-charging = "{capacity}% ";
+      format-plugged = "{capacity}% ";
+      format-alt = "{time}";
+    };
+
+    "clock" = {
+      format = "󰥔 {:%H:%M}";
+      tooltip = true;
+      tooltip-format = "{:%A, %d %B %Y | %H:%M:%S}";
     };
   };
+};
 }
