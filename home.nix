@@ -4,6 +4,8 @@
   imports = [
     ./home/zsh.nix
     ./home/waybar.nix
+    # ./home/wofi.nix
+    ./home/fuzzel.nix
   ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -18,6 +20,16 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "25.05"; # Please read the comment before changing.
+
+  # gtk = {
+  #   enable = true;
+  #   theme = {
+  #     name = "tokyo-dark";
+  #     package = pkgs.tokyo-night-gtk;
+  #   };
+  # };
+  #
+  # home.sessionVariables.GTK_THEME = "tokyo-dark";
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
