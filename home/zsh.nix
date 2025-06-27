@@ -148,7 +148,7 @@ in
                         export PATH=$PATH:$HOME/.scripts
             export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
     '';
-    initExtra = ''
+    initContent = ''
                         source ${functionsScripts}
 
             [ -f ~/.zshenv_secret ] && source ~/.zshenv_secret
