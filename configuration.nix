@@ -167,8 +167,8 @@ services.interception-tools =
     gcc
     git
     stow
-    wofi
     alacritty
+    kitty
     google-chrome
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     rpi-imager
