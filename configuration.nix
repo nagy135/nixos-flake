@@ -16,6 +16,11 @@
   boot.loader.grub.device = "/dev/nvme0n1";
   boot.loader.grub.useOSProber = true;
 
+ swapDevices = [ {
+    device = "/var/lib/swapfile";
+    size = 16*1024;
+  } ];
+
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   networking.hostName = "nixos"; # Define your hostname.
