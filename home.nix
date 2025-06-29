@@ -91,6 +91,12 @@
     enable = true;
     userName  = "Viktor Nagy";
     userEmail = "viktor.nagy1995@gmail.com";
+    package = pkgs.gitAndTools.gitFull;
+    delta = { enable = true; };
+    signing = {
+       key = "2C0A2CF87A0E8025";
+       signByDefault = true;
+    };
   };
 
 

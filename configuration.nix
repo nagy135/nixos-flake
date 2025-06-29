@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./packages.nix
       inputs.home-manager.nixosModules.default
     ];
 
@@ -51,20 +52,12 @@
     LC_TIME = "sk_SK.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
   # services.displayManager.sddm.enable = true;
   # services.desktopManager.plasma6.enable = true;
+  services.xserver.enable = false;
   programs.hyprland.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
@@ -76,8 +69,6 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-    environment.etc."zsh-fzf-tab/fzf-tab.plugin.zsh".source = "${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh";
-
   environment = {
     sessionVariables = {
       LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
@@ -85,10 +76,6 @@
   };
 
   networking.firewall.allowedTCPPorts = [ 80 ];
-
-  programs.zsh.enable = true;
-  programs.zsh.promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-
 
   # Enable common container config files in /etc/containers
   virtualisation.containers.enable = true;
@@ -107,7 +94,7 @@
   security.pam.sshAgentAuth.enable = true;
   security.pam.services.sudo.sshAgentAuth = true;
 
-    hardware.bluetooth.enable = true;
+  hardware.bluetooth.enable = true;
 
 services.interception-tools =
   let
@@ -155,96 +142,6 @@ services.interception-tools =
     #  thunderbird
     ];
   };
-
-
-  # Install firefox.
-  programs.firefox.enable = true;
-  nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-  blueberry
-    gcc
-    git
-    stow
-    alacritty
-    kitty
-    google-chrome
-    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    rpi-imager
-    rustc
-    cargo
-    gnumake
-    rust-analyzer
-    ncdu
-    gammastep
-    rofi-wayland
-    sxiv
-    wget
-    google-chrome
-    git
-    lazygit
-    # qutebrowser
-    gopls
-    mpv
-    lsd
-    zsh
-    zsh-powerlevel10k
-    gcc
-    zig
-    killall
-    lua
-    stow
-    nautilus
-    neofetch
-    dmenu
-    vifm
-    tmux
-    ffmpeg
-    docker
-    docker-compose
-    fzf
-    htop
-    bun
-    nodePackages.npm
-    nodePackages.typescript
-    nodePackages.prettier
-    nodejs
-    pavucontrol
-    yt-dlp
-    zsh-fzf-tab
-    pipewire
-    libnotify
-    dunst
-    spotify
-    pamixer
-    postman
-    transmission_3
-    ripgrep
-    z-lua
-    jq
-    nix-prefetch-scripts
-    steam
-    stig
-    zip
-    unzip
-    file
-    sumneko-lua-language-server
-    gh
-    gimp
-    wl-clipboard
-    hyprshot
-    spotify
-    bambu-studio
-    code-cursor
-    teams-for-linux
-    gnupg
-    pinentry-gtk2
-    portal
-    wf-recorder
-  #  wget
-  ];
 
   services.pcscd.enable = true;
   programs.gnupg.agent = {

@@ -146,9 +146,9 @@ programs.waybar.settings = {
       "eDP-1"
       "HDMI-A-1"
     ];
-    modules-left = [ "hyprland/workspaces"];
+    modules-left = [ "hyprland/workspaces" "tray"];
     modules-center = [ "hyprland/window" ];
-    modules-right = [ "battery" "cpu" "memory" "temperature" "clock" ];
+    modules-right = [ "network" "battery" "cpu" "memory" "temperature" "clock" ];
 
     "cpu" = {
       format = " {usage}%";
@@ -156,7 +156,7 @@ programs.waybar.settings = {
     };
 
     "memory" = {
-      format = " {used}MB";
+      format = " {percentage}%";
     };
 
     "temperature" = {
