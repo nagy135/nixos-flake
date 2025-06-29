@@ -4,7 +4,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  blueberry
+    blueberry
     gcc
     git
     stow
@@ -55,6 +55,8 @@
     yt-dlp
     zsh-fzf-tab
     pipewire
+    wireplumber
+    xdg-desktop-portal-hyprland
     libnotify
     dunst
     spotify
@@ -83,7 +85,10 @@
     pinentry-gtk2
     portal
     wf-recorder
-  #  wget
+    zathura
+    copyq
+    wl-kbptr
+    wlrctl
   ];
 
   environment.etc."zsh-fzf-tab/fzf-tab.plugin.zsh".source = "${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh";
