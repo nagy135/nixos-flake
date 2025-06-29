@@ -56,7 +56,7 @@
   # Enable the KDE Plasma Desktop Environment.
   # services.displayManager.sddm.enable = true;
   # services.desktopManager.plasma6.enable = true;
-  services.xserver.enable = false;
+  services.xserver.enable = true;
   programs.hyprland.enable = true;
 
   home-manager = {
@@ -96,22 +96,22 @@
 
   hardware.bluetooth.enable = true;
 
-services.interception-tools =
-  let
-    itools = pkgs.interception-tools;
-    itools-caps = pkgs.interception-tools-plugins.caps2esc;
-  in
-  {
-    enable = true;
-    plugins = [ itools-caps ];
-    # requires explicit paths: https://github.com/NixOS/nixpkgs/issues/126681
-    udevmonConfig = pkgs.lib.mkDefault ''
-      - JOB: "${itools}/bin/intercept -g $DEVNODE | ${itools-caps}/bin/caps2esc -m 1 | ${itools}/bin/uinput -d $DEVNODE"
-        DEVICE:
-          EVENTS:
-            EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
-    '';
-  };
+# services.interception-tools =
+#   let
+#     itools = pkgs.interception-tools;
+#     itools-caps = pkgs.interception-tools-plugins.caps2esc;
+#   in
+#   {
+#     enable = true;
+#     plugins = [ itools-caps ];
+#     # requires explicit paths: https://github.com/NixOS/nixpkgs/issues/126681
+#     udevmonConfig = pkgs.lib.mkDefault ''
+#       - JOB: "${itools}/bin/intercept -g $DEVNODE | ${itools-caps}/bin/caps2esc -m 1 | ${itools}/bin/uinput -d $DEVNODE"
+#         DEVICE:
+#           EVENTS:
+#             EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
+#     '';
+#   };
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -181,5 +181,56 @@ services.interception-tools =
       '';
    };
   };
+  
+
+  services.kanata = {
+    enable = true;
+    keyboards = {
+      internalKeyboard = {
+        extraDefCfg = "process-unmapped-keys yes";
+        # config = ''
+        #   (defsrc
+        #    caps a s d f j k l ;
+        #   )
+        #   (defvar
+        #    tap-time 100
+        #    hold-time 200
+        #   )
+        #   (defalias
+        #    caps (tap-hold 100 100 esc lctl)
+        #    a (tap-hold $tap-time $hold-time a lmet)
+        #    s (tap-hold $tap-time $hold-time s lalt)
+        #    d (tap-hold $tap-time $hold-time d lsft)
+        #    f (tap-hold $tap-time $hold-time f lctl)
+        #    j (tap-hold $tap-time $hold-time j rctl)
+        #    k (tap-hold $tap-time $hold-time k rsft)
+        #    l (tap-hold $tap-time $hold-time l ralt)
+        #    ; (tap-hold $tap-time $hold-time ; rmet)
+        #   )
+        #
+        #   (deflayer base
+        #    @caps @a  @s  @d  @f  @j  @k  @l  @;
+        #   )
+        # '';
+        config = ''
+          (defsrc
+           caps
+          )
+          (defvar
+           tap-time 100
+           hold-time 200
+          )
+          (defalias
+           caps (tap-hold 100 100 esc lctl)
+          )
+
+          (deflayer base
+           @caps
+          )
+        '';
+      };
+    };
+  };
+
   system.stateVersion = "25.05"; # Did you read the comment?
 }
