@@ -12,6 +12,12 @@
   home.username = "infiniter";
   home.homeDirectory = "/home/infiniter";
 
+  programs.zathura.options = {
+    enable = true;
+    default-bg = "#0b0b0b";
+    default-fg = "#f0f0f0";
+  };
+
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
