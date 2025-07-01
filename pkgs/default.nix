@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs }:
 
 {
   oso-cloud = pkgs.callPackage ./oso-cloud { };
