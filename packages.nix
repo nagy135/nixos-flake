@@ -1,9 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    inputs.self.packages.${pkgs.system}.oso-cloud
     blueberry
     gcc
     git
@@ -89,6 +90,9 @@
     copyq
     wl-kbptr
     wlrctl
+    brightnessctl
+    hyprlock
+    go
   ];
 
   environment.etc."zsh-fzf-tab/fzf-tab.plugin.zsh".source = "${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh";
