@@ -16,5 +16,14 @@
         ./configuration.nix
       ];
     };
+
+    packages.x86_64-linux = 
+      let
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+        };
+      in
+        import ./pkgs { inherit pkgs; };
   };
 }
