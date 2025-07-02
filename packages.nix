@@ -96,6 +96,7 @@ in
     brightnessctl
     hyprlock
     go
+    hypridle
   ];
 
   environment.etc."zsh-fzf-tab/fzf-tab.plugin.zsh".source = "${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh";
